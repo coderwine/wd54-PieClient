@@ -3,17 +3,35 @@ import './App.css';
 
 import Navbar from './components/Navbar/Navbar';
 import Auth from './components/Auth/Auth';
+import Pies from './components/Pies/Pies';
+import Pie from './components/Pies/Pie/Pie';
 
 function App() {
 
   const [sessionToken, setSessionToken] = useState(undefined);
   console.log(sessionToken);
 
+  const viewConductor = () => {
+    return sessionToken !== undefined ? 
+      <Pies token={sessionToken}/> :
+      <Auth updateToken={updateToken}/>
+  }
+
+  const updateToken = newToken => {
+    localStorage.setItem('token: ', newToken);
+    setSessionToken(newToken)
+  }
+
+  const clearToken = () => {
+    localStorage.clear();
+    setSessionToken(undefined);
+  }
 
   return (
     <div className="App">
-      <Navbar setSession={setSessionToken}/>
-      <Auth/>
+      <Navbar clearToken={clearToken}/>
+      {viewConductor()}
+      
     </div>
   );
 }

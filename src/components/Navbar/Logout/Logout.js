@@ -7,7 +7,7 @@ const Logout = (props) => {
     return(
         
         <div>
-            <img id="logout" className="logout" src={logoutPic} alt="powerbutton"/>
+            <img onClick={() => props.clearToken()} id="logout" className="logout" src={logoutPic} alt="powerbutton"/>
         </div>
     )
 };
